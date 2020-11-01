@@ -163,6 +163,8 @@ async function queryKey(uuid){
 
         // Disconnect from the gateway.
         await gateway.disconnect();
+
+        return result;
         
     } catch (error) {
         console.error(`Failed to evaluate transaction: ${error}`);
@@ -176,7 +178,7 @@ async function main(){
     
 }
 
-main();
+// main();
 
 
 app.get('/', (req, res) => {
@@ -196,11 +198,25 @@ app.post('/api/enroll/', (req, res) =>{
         res.send(vc);
       })()
   });
+
+app.post('/api/searchkey', (req, res) =>{
+    let uuid = req.body.uuid;
+   
+    (async function(){
+        let jsonObj = JSON.parse(await queryKey(uuid));
+        res.send(jsonObj);
+        // console.log(JSON.parse(test));
+        // let publickey = {
+        //     "publickey": await queryKey(uuid)
+        // }
+        // res.send(publickey);
+    })()
+});
   
-  const port = process.env.port || 3000
-  app.listen(port, () => {
-    console.log(`Start server at port ${port}.`)
-  });
+const port = process.env.port || 3000
+app.listen(port, () => {
+    console.log(`Start server at port ${port}.`);
+});
 
 
 
