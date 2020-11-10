@@ -8,39 +8,27 @@ class Holder extends Component {
     document.title = "VDegree | Holder";
   }
 
-  data = [1, 2, 3, 4];
-
   render() {
-    const data = this.data;
-    for (var i = 0; i < data.length; i++) {
-      // var test = data[i];
+    const name = ["one", "two", "three"];
+    const items = [];
+
+    for (var i = 0; i < name.length; i++) {
+      items.push(
+        <a className="list" href="#">
+          <dt>{"นาย " + name[i] + " ได้ส่งคำขอ"}</dt>
+        </a>
+      );
     }
 
-    // console.log(data);
     return (
       <Fragment>
         <Container fluid>
           <Row class="justify-content-center">
             <Col xs="4" id="menu">
-              <button onclick={this.test}></button>
               <p id="menu-topic">WALLET</p>
               <div id="name-list">
-                <a className="list" href="#">
-                  {data}
-                </a>
+                <dl>{items}</dl>
                 <br />
-                {/* <a className="list" href="#">
-                  Mock up
-                </a>
-                <br />
-                <a className="list" href="#">
-                  Mock up
-                </a>
-                <br />
-                <a className="list" href="#">
-                  Mock up
-                </a>
-                <br /> */}
               </div>
             </Col>
             <Col xs="8" id="content">
