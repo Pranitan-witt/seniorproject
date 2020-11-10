@@ -8,6 +8,17 @@ class Verifier extends Component {
   }
 
   render() {
+  const name = ["one", "two", "three"];
+    const items = [];
+
+    for (var i = 0; i < name.length; i++) {
+      items.push(
+        <a className="list" href="#">
+          <dt>{"นาย " + name[i] + " รอตรวจสอบ"}</dt>
+        </a>
+      );
+    }
+    
     return (
       <Fragment>
         <Container fluid>
@@ -15,21 +26,7 @@ class Verifier extends Component {
             <Col xs="4" id="menu">
               <p id="menu-topic">INBOX</p>
               <div id="name-list">
-                <a className="list" href="#">
-                  นายประณิธาน วิทยารณยุทธ รอตรวจสอบ
-                </a>
-                <br />
-                <a className="list" href="#">
-                  นายประณิธาน วิทยารณยุทธ รอตรวจสอบ
-                </a>
-                <br />
-                <a className="list" href="#">
-                  นายประณิธาน วิทยารณยุทธ รอตรวจสอบ
-                </a>
-                <br />
-                <a className="list" href="#">
-                  นายประณิธาน วิทยารณยุทธ รอตรวจสอบ
-                </a>
+                <dl>{items}</dl>
                 <br />
               </div>
             </Col>

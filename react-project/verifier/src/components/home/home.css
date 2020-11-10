@@ -35,6 +35,11 @@ justify-content: center;
   background-color: rgb(165, 195, 250);
 }
 
+#inputPass {
+  max-width: 50%;
+  text-align: center;
+}
+
 button {
   height: 20%;
   width: 40%;

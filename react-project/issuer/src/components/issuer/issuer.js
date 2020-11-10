@@ -7,6 +7,17 @@ class Issuer extends Component {
     document.title = "VDegree | Issuer";
   }
   render() {
+    const name = ["one", "two", "three"];
+    const items = [];
+
+    for (var i = 0; i < name.length; i++) {
+      items.push(
+        <a className="list" href="#">
+          <dt>{"นาย " + name[i] + " ได้ส่งคำขอ"}</dt>
+        </a>
+      );
+    }
+
     return (
       <Fragment>
         <Container fluid>
@@ -14,21 +25,7 @@ class Issuer extends Component {
             <Col xs="4" id="menu">
               <p id="menu-topic">INBOX</p>
               <div id="name-list">
-                <a className="list" href="#">
-                  นายประณิธาน วิทยารณยุทธ ได้ส่งคำขอ
-                </a>
-                <br />
-                <a className="list" href="#">
-                  นายประณิธาน วิทยารณยุทธ ได้ส่งคำขอ
-                </a>
-                <br />
-                <a className="list" href="#">
-                  นายประณิธาน วิทยารณยุทธ ได้ส่งคำขอ
-                </a>
-                <br />
-                <a className="list" href="#">
-                  นายประณิธาน วิทยารณยุทธ ได้ส่งคำขอ
-                </a>
+                <dl>{items}</dl>
                 <br />
               </div>
             </Col>

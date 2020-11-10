@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import "./home.css";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Form, Input, FormGroup, Col } from "reactstrap";
 
 class Home extends Component {
   componentDidMount() {
@@ -16,23 +16,25 @@ class Home extends Component {
             </div>
             <div id="middle"></div>
             <div id="buttom">
-              <button>เริ่มใช้งานระบบ</button>
+              <Col sm="6">
+                <center>
+                  <Form>
+                    <FormGroup>
+                      <Input
+                        type="password"
+                        name="password"
+                        id="inputPass"
+                        placeholder="Enter your password"
+                      />
+                    </FormGroup>
+                  </Form>
+                  <button>เริ่มใช้งานระบบ</button>
+                </center>
+              </Col>
             </div>
           </Row>
         </Container>
       </Fragment>
-
-      // <div id="home" class="container-fluid">
-      //     <div class="row justify-content-center">
-      //         <div id="top" class="col-sm-4">
-      //             <h1>VDGREE</h1>
-      //         </div>
-      //         <div id="middle"></div>
-      //         <div id="buttom">
-      //             <button>เริ่มใช้งานระบบ</button>
-      //         </div>
-      //     </div>
-      // </div>
     );
   }
 }
