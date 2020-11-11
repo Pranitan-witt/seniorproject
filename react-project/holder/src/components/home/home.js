@@ -44,9 +44,10 @@ class Home extends Component {
                         name="password"
                         placeholder="Enter your password"
                       />
-                      <input type="submit" value="เริ่มใช้งานระบบ"></input>
+                      {/* <input type="submit" value="เริ่มใช้งานระบบ"></input> */}
                     </FormGroup>
                   </Form>
+                  <button>เริ่มใช้งานระบบ</button>
                 </center>
               </Col>
             </div>
