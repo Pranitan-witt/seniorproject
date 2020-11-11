@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
 import "./home.css";
 import { Container, Row, Col, Form, FormGroup, Input } from "reactstrap";
-class Home extends Component {
+
+class Home extends React.Component {
   componentDidMount() {
     document.title = "VDegree | Home";
   }
