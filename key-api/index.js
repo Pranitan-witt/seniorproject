@@ -219,5 +219,13 @@ app.listen(port, () => {
 });
 
 
+try {
+    if (! fs.existsSync('/wallet/admin.id')) {
+      //file exists
+      main();
+    }
+  } catch(err) {
+    console.error(err)
+}
 
 

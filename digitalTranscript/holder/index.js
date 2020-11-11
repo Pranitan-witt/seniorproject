@@ -88,4 +88,6 @@ async function requestDT(){
   });
 }
 
-requestDT();
+// requestDT();
+
+console.log(JSON.parse(fs.readFileSync(path.resolve(__dirname,'digitalTranscript', 'holder_tr.dt')), 'utf8'));

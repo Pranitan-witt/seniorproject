@@ -9,6 +9,7 @@ const request = require('request');
 const jwt = require('jsonwebtoken');
 const prompt = require('prompt-sync')();
 const walletPath = path.join(process.cwd(), 'wallet');
+const holder_tr = path.resolve(__dirname,  '..', 'holder', 'digitalTranscript');
 
 // const passphrase = prompt('What is your name: ');
 // console.log(`Here is passphrase: ${passphrase}`);
@@ -56,7 +57,7 @@ async function enroll(){
   });
 
 }
-enroll();
+// enroll();
 
 async function issueDT(){
     let json_obj = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'requests', 'holder_request.credential'),'utf8'));
@@ -76,13 +77,25 @@ async function issueDT(){
         }, 
         function (error, response, body){
         if(body){
-          jwt.verify(token, body['proof'], function(err, decoded){
+          console.log(body);
+          jwt.verify(token, body['publickey'], function(err, decoded){
             if(decoded != undefined){
-              digital_Tr = {
-                // "uuid":
+              let myUUID = JSON.parse(fs.readFileSync(walletPath+'/issuer.credential'))['uuid'];
+              let prKey = fs.readFileSync(walletPath+'/issuer_privatekey.key');
+              let dt = fs.readFileSync('digitalTranscript/pranitan.dt');
+              let encrypted_data = jwt.sign(dt, {key:prKey, passphrase}, { algorithm: 'RS256'});
+              let digital_tr = {
+                "uuid": myUUID,
+                "data": encrypted_data
               };
+
+              fs.writeFile(holder_tr+"/holder_tr.dt", JSON.stringify(digital_tr), function(err) {
+                if(err) throw err;
+                console.log("Holder digital transcript was saved!");
+              });
+
             }else{
-              console.log('Can not decrypt')
+              console.log('Can not decrypt !')
             }
 
           });
@@ -95,7 +108,5 @@ async function issueDT(){
     }
 }
 
-// let test = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'digitalTranscript', 'pranitan.dt'), 'utf-8'));
-// console.log(test['@context']);
-// issueDT();
 
+// issueDT();
