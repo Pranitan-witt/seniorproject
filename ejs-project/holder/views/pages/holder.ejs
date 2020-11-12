@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Holder</title>
+    <title><%- title%></title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="holder.css" />
@@ -11,14 +11,14 @@
     />
   </head>
   <body>
+    <script type="text/javascript" src="holder.js"></script>
     <div class="container-fluid h-100">
       <div class="row justify-content-center h-100">
         <div id="menu" class="col-sm-4">
             <p id="menu-topic">WALLET</p>
             <div id="name-list">
-                <% var test = [1,2,3,4,5] %>
-                <% for (var i=0; i<test.length;i++ ) { %>
-                    <a class="list" href="#"><%= test[i] %></a><br />
+                <% for(var i=0;i<list.length;i++) { %>
+                    <a class="list" href="#"><%= list[i] %></a><br />
                 <% } %>
           </div>
         </div>
@@ -26,12 +26,16 @@
           <p id="content-topic">HOLDER</p>
           <div id="content-box">
             <p>
-              ชื่อ-สกุล: นายประณิธาน วิทยารณยุทธ<br />
+              <% for(var i=0;i<list.length;i++) { %>
+                <%= mock_up_data[i] %><br>
+              <% } %>
+
+              <!-- ชื่อ-สกุล: นายประณิธาน วิทยารณยุทธ<br />
               รายวิชา: CP463 Artificial Intelligence<br />
               ผลการเรียน: A<br />
               Mock up<br />
               Mock up<br />
-              Mock up<br />
+              Mock up<br /> -->
             </p>
           </div>
         </div>

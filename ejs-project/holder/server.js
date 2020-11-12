@@ -12,7 +12,20 @@ app.get("/", function (req, res) {
 });
 
 app.get("/holder", function (req, res) {
-  res.render("pages/holder");
+  var title = "Holder";
+  var list = [1, 2, 3, 4, 5];
+  var i = 0;
+  var mock_up_data = [
+    "นายประณิธาน วิทยารณยุทธ",
+    "CP463 Artificial Intelligence",
+    "A",
+  ];
+
+  res.render("pages/holder", {
+    title: title,
+    list: list,
+    mock_up_data: mock_up_data,
+  });
 });
 
 app.listen(3000);
