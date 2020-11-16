@@ -15,5 +15,5 @@ app.get("/issuer", function (req, res) {
   res.render("pages/issuer");
 });
 
-app.listen(4000);
-console.log("4000 is the magic port");
+app.listen(3002);
+console.log("3002 is the issuer port");

@@ -11,6 +11,10 @@ const walletPath = path.join(process.cwd(), 'wallet');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// important variable
+
+const ccpPath = path.resolve(__dirname, '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+
 async function enrollAdmin() {
     try {
         // load the network configuration
@@ -57,7 +61,7 @@ async function enrollAdmin() {
 async function queryAll(){
     try {
         // load the network configuration
-        const ccpPath = path.resolve(__dirname, '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
 
         // Create a new file system based wallet for managing identities.
@@ -225,7 +229,6 @@ try {
       main();
     }
   } catch(err) {
-    console.error(err)
 }
 
 

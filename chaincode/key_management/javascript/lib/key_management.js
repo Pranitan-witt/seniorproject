@@ -8,14 +8,14 @@ class Key_management extends Contract {
         console.info('============= START : Initialize Ledger ===========');
         const keys = [
           {
-              "publickey":"test"
+           
           }
         ];
 
-        for (let i = 0; i < keys.length; i++) {
-            await ctx.stub.putState('UUID' + i, Buffer.from(JSON.stringify(keys[i])));
-            console.info('Added <--> ', keys[i]);
-        }
+        // for (let i = 0; i < keys.length; i++) {
+        //     await ctx.stub.putState('UUID' + i, Buffer.from(JSON.stringify(keys[i])));
+        //     console.info('Added <--> ', keys[i]);
+        // }
         console.info('============= END : Initialize Ledger ===========');
     }
 
@@ -32,8 +32,7 @@ class Key_management extends Contract {
         console.info('============= START : Create Car ===========');
 
         const data = {
-            publickey,
-            docType: 'data',
+            publickey
         };
 
         await ctx.stub.putState(uuid, Buffer.from(JSON.stringify(data)));

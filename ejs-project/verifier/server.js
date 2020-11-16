@@ -15,5 +15,5 @@ app.get("/verifier", function (req, res) {
   res.render("pages/verifier");
 });
 
-app.listen(5000);
-console.log("5000 is the magic port");
+app.listen(3003);
+console.log("3003 is the verifier port");
