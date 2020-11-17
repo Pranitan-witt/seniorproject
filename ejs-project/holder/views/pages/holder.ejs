@@ -16,9 +16,9 @@
       <div class="row justify-content-center h-100">
         <div id="menu" class="col-sm-4">
             <p id="menu-topic">WALLET</p>
-            <div id="name-list">
+            <div id="name-list">                
                 <% for(var i=0;i<list.length;i++) { %>
-                    <a class="list" href="#"><%= list[i] %></a><br />
+                    <a class="list" id="name" href="#"><%= list[i] %></a><br />
                 <% } %>
           </div>
         </div>
@@ -26,20 +26,27 @@
           <p id="content-topic">HOLDER</p>
           <div id="content-box">
             <p>
-              <% for(var i=0;i<list.length;i++) { %>
-                <%= mock_up_data[i] %><br>
-              <% } %>
 
-              <!-- ชื่อ-สกุล: นายประณิธาน วิทยารณยุทธ<br />
-              รายวิชา: CP463 Artificial Intelligence<br />
-              ผลการเรียน: A<br />
-              Mock up<br />
-              Mock up<br />
-              Mock up<br /> -->
+              <% selectedData = null; %>
+              <% if (selectedData != null) {%>
+                <% for(var i=0;i<list.length;i++) { %>
+                  <%= mock_up_data[i] %><br>
+                <% } %>
+              <% } %>
             </p>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- <script>
+      var x = document.getElementById("name");
+      x.addEventListener("click", test);
+
+      function test() {
+        selectedData =
+      }
+    </script>   -->
+
   </body>
 </html>
