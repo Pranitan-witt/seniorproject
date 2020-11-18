@@ -16,10 +16,10 @@
       <div class="row justify-content-center h-100">
         <div id="menu" class="col-sm-4">
             <p id="menu-topic">WALLET</p>
-            <div id="name-list">                
-                <% for(var i=0;i<list.length;i++) { %>
-                    <a class="list" id="name" href="#"><%= list[i] %></a><br />
-                <% } %>
+            <div id="name-list">   
+
+              <!-- <a href="" style="color:red">Request for transcript.</a> -->
+              <button disabled>Request for transcript.</button>
           </div>
         </div>
         <div id="content" class="col-sm-8">
@@ -27,12 +27,7 @@
           <div id="content-box">
             <p>
 
-              <% selectedData = null; %>
-              <% if (selectedData != null) {%>
-                <% for(var i=0;i<list.length;i++) { %>
-                  <%= mock_up_data[i] %><br>
-                <% } %>
-              <% } %>
+            
             </p>
           </div>
         </div>
