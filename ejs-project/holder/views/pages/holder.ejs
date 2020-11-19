@@ -1,48 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title><%- title%></title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="holder.css" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-sm bg-info navbar-dark">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">PRONHUB</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">THAI</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">HANIME</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">DOJIN</a>
-        </li>
-      </ul>
-    </nav>
-    <script type="text/javascript" src="holder.js"></script>
-    <div class="container-fluid h-100">
-      <div class="row justify-content-center h-100">
-        <div id="menu" class="col-sm-4">
-            <p id="menu-topic">WALLET</p>
-            <div id="name-list">                
-                <% for(var i=0;i<list.length;i++) { %>
-                    <a class="list" id="name" href="#"><%= list[i] %></a><br />
-                <% } %>
-          </div>
+
+<head>
+  <title><%- title%></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="holder.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <center><img src="https://www.w3schools.com/images/w3schools_green.jpg" class="rounded-circle" alt="pic">
+      <h2><%- title%></h2>
+    </center>
+    <hr style="background-color: whitesmoke">
+    <button class="menu-list" href="#">Home</button>
+    <button class="dropdown-btn">My transcript
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a class="list" href="#">Link 1</a>
+      <a class="list" href="#">Link 2</a>
+      <a class="list" href="#">Link 3</a>
+    </div>
+
+  </div>
+
+  <div id="main" class="row">
+    <!-- <form class="form-inline">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">@</span>
         </div>
-        <div id="content" class="col-sm-8">
+        <input type="text" class="form-control" placeholder="Username">
+      </div>
+    </form> -->
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; VDEGREE</span>
+    <form class="form-inline">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">UUID</span>
+        </div>
+        <input type="text" class="form-control" placeholder="UUID" disabled>
+      </div>
+    </form>
+
+    <div id="content" class="col-sm-12">
+      <p id="content-topic">HOLDER</p>
+      <div id="content-box">
+        <p>
+          <% selectedData = null; %>
+          <% if (selectedData != null) {%>
+          <% for(var i=0;i<list.length;i++) { %>
+          <%= mock_up_data[i] %><br>
+          <% } %>
+          <% } %>
+        </p>
+      </div>
+    </div>
+
+    <!-- <% for(var i=0;i<list.length;i++) { %>
+                    <a class="list" id="name" href="#"><%= list[i] %></a><br />
+                <% } %> -->
+
+    <!-- <div id="content" class="col-sm-12">
           <p id="content-topic">HOLDER</p>
           <div id="content-box">
             <p>
-
               <% selectedData = null; %>
               <% if (selectedData != null) {%>
                 <% for(var i=0;i<list.length;i++) { %>
@@ -50,19 +83,42 @@
                 <% } %>
               <% } %>
             </p>
-          </div>
-        </div>
-      </div>
-    </div>
+          </div> -->
+  </div>
+  </div>
+  </div>
 
-    <!-- <script>
-      var x = document.getElementById("name");
-      x.addEventListener("click", test);
 
-      function test() {
-        selectedData =
-      }
-    </script>   -->
+  <script>
+    // Navbar
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
 
-  </body>
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+    }
+
+    // Dropdown in side navbar
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+    }
+
+  </script>
+
+</body>
+
 </html>
