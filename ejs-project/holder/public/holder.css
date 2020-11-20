@@ -25,6 +25,7 @@ body {
   background-color: whitesmoke;
   color: black;
   height: 100vh;
+  padding-top: 50px;
 }
 
 #content-topic {
@@ -40,7 +41,7 @@ body {
   border-radius: 5%;
   margin: auto;
   height: 50%;
-  width: 80%;
+  width: 90%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -174,4 +175,18 @@ img {
 
 h2 {
   color: #818181;
+}
+
+#uuid {
+  padding-top: 6px;
+  padding-left: 20px;
+  font-size: 18px;
+}
+
+input {
+  background-color: white;
+}
+
+#sentbtn {
+  margin-top: 30px;
 }

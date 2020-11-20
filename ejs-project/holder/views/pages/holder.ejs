@@ -15,47 +15,30 @@
 </head>
 
 <body>
-
-
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <center><img src="https://www.w3schools.com/images/w3schools_green.jpg" class="rounded-circle" alt="pic">
-      <h2><%- title%></h2>
+      <h2 style="margin-top: -8px;"><%- title%></h2>
     </center>
-    <hr style="background-color: whitesmoke">
+    <hr style="background-color: whitesmoke;margin-top: -2px;">
     <button class="menu-list" href="#">Home</button>
     <button class="dropdown-btn">My transcript
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-container">
-      <a class="list" href="#">Link 1</a>
-      <a class="list" href="#">Link 2</a>
-      <a class="list" href="#">Link 3</a>
+      <a class="list" href="#">เทอม 1 ปีการศึกษา 2560</a>
+      <a class="list" href="#">เทอม 2 ปีการศึกษา 2560</a>
+      <a class="list" href="#">เทอม 1 ปีการศึกษา 2561</a>
     </div>
-
   </div>
 
   <div id="main" class="row">
-    <!-- <form class="form-inline">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">@</span>
-        </div>
-        <input type="text" class="form-control" placeholder="Username">
-      </div>
-    </form> -->
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; VDEGREE</span>
-    <form class="form-inline">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">UUID</span>
-        </div>
-        <input type="text" class="form-control" placeholder="UUID" disabled>
-      </div>
-    </form>
+    <div id="uuid">
+      <input type="text" placeholder="123456789" disabled>
+    </div>
 
     <div id="content" class="col-sm-12">
-      <p id="content-topic">HOLDER</p>
       <div id="content-box">
         <p>
           <% selectedData = null; %>
@@ -66,6 +49,7 @@
           <% } %>
         </p>
       </div>
+      <center><button type="button" id="sentbtn" class="btn btn-dark">ส่งคำขอ Transcript</button></center>
     </div>
 
     <!-- <% for(var i=0;i<list.length;i++) { %>
