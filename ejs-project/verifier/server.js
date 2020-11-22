@@ -1,6 +1,8 @@
 var express = require("express");
 var app = express();
 
+const title = "Verifier";
+
 // set the view engine to ejs
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -8,11 +10,15 @@ app.use(express.static("public"));
 
 // index page
 app.get("/", function (req, res) {
-  res.render("pages/index");
+  res.render("pages/index", {
+    title,
+  });
 });
 
 app.get("/verifier", function (req, res) {
-  res.render("pages/verifier");
+  res.render("pages/verifier", {
+    title,
+  });
 });
 
 app.listen(3003);

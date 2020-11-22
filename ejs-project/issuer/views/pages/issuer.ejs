@@ -1,41 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Holder</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="issuer.css" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-  </head>
-  <body>
-    <div class="container-fluid h-100">
-      <div class="row justify-content-center h-100">
-        <div id="menu" class="col-sm-4">
-            <p id="menu-topic">WALLET</p>
-            <div id="name-list">
-                <% var test = [1,2,3,4,5] %>
-                <% for (var i=0; i<test.length;i++ ) { %>
-                    <a class="list" href="#"><%= test[i] %></a><br />
-                <% } %>
-          </div>
-        </div>
-        <div id="content" class="col-sm-8">
-          <p id="content-topic">HOLDER</p>
-          <div id="content-box">
-            <p>
-              ชื่อ-สกุล: นายประณิธาน วิทยารณยุทธ<br />
-              รายวิชา: CP463 Artificial Intelligence<br />
-              ผลการเรียน: A<br />
-              Mock up<br />
-              Mock up<br />
-              Mock up<br />
-            </p>
-          </div>
-        </div>
-      </div>
+
+<head>
+  <title><%- title%></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="issuer.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <center><img src="https://www.w3schools.com/images/w3schools_green.jpg" class="rounded-circle" alt="pic">
+      <h2 style="margin-top: -20px;"><%- title%></h2>
+      <hr style="background-color: whitesmoke;margin-top: -2px;">
+      <h3 id="inbox">INBOX</h3>
+      <hr style="background-color: whitesmoke;margin-top: -2px;">
+      <a class="list" href="#">นายประณิธาน วิทยารณยุทธ</a>
+      <a class="list" href="#">นายปรินทร ปาณฑิตยางกูร</a>
+      <a class="list" href="#">นายธนกฤต บรรจงศิลป์</a>
+    </center>
+  </div>
+
+  <div id="main" class="row">
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; VDEGREE</span>
+    <div id="uuid">
+      <input type="text" placeholder="123456789" disabled>
     </div>
-  </body>
+
+    <div id="content" class="col-sm-12">
+      <div id="content-box">
+        <p>
+          <!-- data -->
+        </p>
+      </div>
+      <center>
+        <button type="button" id="sentbtn" class="btn btn-dark btn-lg">อนุมัติ</button>
+        <button type="button" id="sentbtn" class="btn btn-dark btn-lg">ไม่อนุมัติ</button>
+      </center>
+    </div>
+  </div>
+
+  <script>
+    // Navbar
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+    }
+
+  </script>
+
+</body>
+
 </html>

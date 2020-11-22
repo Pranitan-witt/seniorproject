@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Holder</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="verifier.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container-fluid h-100">
+      <div class="row justify-content-center h-100">
+        <div id="menu" class="col-sm-4">
+            <p id="menu-topic">WALLET</p>
+            <div id="name-list">
+                <% var test = [1,2,3,4,5] %>
+                <% for (var i=0; i<test.length;i++ ) { %>
+                    <a class="list" href="#"><%= test[i] %></a><br />
+                <% } %>
+          </div>
+        </div>
+        <div id="content" class="col-sm-8">
+          <p id="content-topic">HOLDER</p>
+          <div id="content-box">
+            <p>
+              ชื่อ-สกุล: นายประณิธาน วิทยารณยุทธ<br />
+              รายวิชา: CP463 Artificial Intelligence<br />
+              ผลการเรียน: A<br />
+              Mock up<br />
+              Mock up<br />
+              Mock up<br />
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
