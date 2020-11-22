@@ -74,7 +74,6 @@ async function searchKey(uuid){
           console.log(`Something went wrong: ${error}`);
       }
   });
-    
 }
 
 async function requestDT(){
@@ -88,6 +87,6 @@ async function requestDT(){
   });
 }
 
-// requestDT();
+requestDT();
 
-console.log(JSON.parse(fs.readFileSync(path.resolve(__dirname,'digitalTranscript', 'holder_tr.dt')), 'utf8'));
+// console.log(JSON.parse(fs.readFileSync(path.resolve(__dirname,'digitalTranscript', 'holder_tr.dt')), 'utf8'));
