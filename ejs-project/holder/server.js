@@ -14,7 +14,7 @@ app.use(express.static("public"));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 // use res.render to load up an ejs view file
-
+const title = "Holder";
 // index page
 app.get("/", function (req, res) {
   if(fs.existsSync(walletPath+'/holder.credential')){
