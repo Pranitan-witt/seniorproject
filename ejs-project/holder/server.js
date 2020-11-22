@@ -1,43 +1,31 @@
 var express = require("express");
 var app = express();
+const request = require('request');
+const jwt = require('jsonwebtoken');
 const { generateKeyPairSync } = require('crypto');
 const path = require('path');
 const fs = require('fs');
-// const passphrase = 'top secret';
-const request = require('request');
-// const prompt = require('prompt-sync')();
-const jwt = require('jsonwebtoken');
 const walletPath = path.join(process.cwd(), 'wallet');
-const bodyParser = require ( "body-parser" );
+const bodyParser = require('body-parser')
 
 // set the view engine to ejs
 app.set("view engine", "ejs");
 app.use(express.static("public"));
-app.use ( bodyParser.urlencoded ( { extended : false } ) );
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 // use res.render to load up an ejs view file
 const title = "Holder";
 // index page
 app.get("/", function (req, res) {
-  fs.access(walletPath+'/holder.credential', fs.F_OK, (err) => {
-    if (err) {
-      res.render('pages/index');
-    }else{
-      res.render('pages/holder',{
-        title: title
-      });
-    }
-  })
-    
+  if(fs.existsSync(walletPath+'/holder.credential')){
+    res.render('pages/holder');
+  }else{
+    res.render("pages/index");
+  }
 });
 
-app.post("/test", function (req, res){
-  // console.log(req.body.password);
-  fs.access(walletPath+'/holder.credential', fs.F_OK, (err) => {
-    if(!err){
-      res.render('pages/holder');
-    }
-  });
-  const passphrase = req.body.password;
+app.post("/holder", function (req, res) {
+  let passphrase = req.body.password;
   const { publicKey, privateKey } = generateKeyPairSync('rsa', {
     modulusLength: 4096,
     publicKeyEncoding: {
@@ -79,38 +67,8 @@ app.post("/test", function (req, res){
       }
   });
 
-  res.render("pages/holder", {
-    title:title
-  });
-});
 
-app.get('/requestDT', function(req, res){
-  let json_obj = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'wallet', 'holder.credential'),'utf8'));
-  let prKey = fs.readFileSync(path.resolve(__dirname, 'wallet', 'holder_privatekey.key'));
-  var token = jwt.sign(new Date().toString(), {key:prKey, passphrase}, { algorithm: 'RS256'});
-  json_obj.proof = token
-  fs.writeFile(issuer_walletPath+"/holder_request.credential", JSON.stringify(json_obj), function(err) {
-    if(err) throw err;
-    console.log("Holder request vc was saved!");
-  });
-  
-});
-
-app.get("/holder", function (req, res) {
-
-  var list = [1, 2, 3, 4, 5];
-  var i = 0;
-  var mock_up_data = [
-    "นายประณิธาน วิทยารณยุทธ",
-    "CP463 Artificial Intelligence",
-    "A",
-  ];
-
-  res.render("pages/holder", {
-    title: title,
-    list: list,
-    mock_up_data: mock_up_data,
-  });
+  res.render("pages/holder");
 });
 
 app.listen(3001);
