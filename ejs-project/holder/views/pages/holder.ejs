@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
   <head>
     <title>Holder</title>
     <meta charset="utf-8" />
@@ -31,17 +32,91 @@
             </p>
           </div>
         </div>
-      </div>
+=======
+
+<head>
+  <title><%- title%></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="holder.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <center><img src="https://www.w3schools.com/images/w3schools_green.jpg" class="rounded-circle" alt="pic">
+      <h2 style="margin-top: -8px;"><%- title%></h2>
+    </center>
+    <hr style="background-color: whitesmoke;margin-top: -2px;">
+    <button class="menu-list" href="#">Home</button>
+    <button class="dropdown-btn">My transcript
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a class="list" href="#">เทอม 1 ปีการศึกษา 2560</a>
+      <a class="list" href="#">เทอม 2 ปีการศึกษา 2560</a>
+      <a class="list" href="#">เทอม 1 ปีการศึกษา 2561</a>
+    </div>
+  </div>
+
+  <div id="main" class="row">
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; VDEGREE</span>
+    <div id="uuid">
+      <input type="text" placeholder="123456789" disabled>
     </div>
 
-    <!-- <script>
-      var x = document.getElementById("name");
-      x.addEventListener("click", test);
+    <div id="content" class="col-sm-12">
+      <div id="content-box">
+        <p>
+          <% selectedData = null; %>
+          <% if (selectedData != null) {%>
+          <% for(var i=0;i<list.length;i++) { %>
+          <%= mock_up_data[i] %><br>
+          <% } %>
+          <% } %>
+        </p>
+>>>>>>> origin/ball
+      </div>
+      <center><button type="button" id="sentbtn" class="btn btn-dark btn-lg">ส่งคำขอ Transcript</button></center>
+    </div>
+  </div>
 
-      function test() {
-        selectedData =
-      }
-    </script>   -->
+  <script>
+    // Navbar
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
 
-  </body>
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+    }
+
+    // Dropdown in side navbar
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+    }
+
+  </script>
+
+</body>
+
 </html>
