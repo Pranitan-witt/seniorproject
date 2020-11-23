@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title><%- title%></title>
+  <title>Verifier</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="verifier.css" />
@@ -18,7 +18,7 @@
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <center><img src="https://www.w3schools.com/images/w3schools_green.jpg" class="rounded-circle" alt="pic">
-      <h2 style="margin-top: -8px;"><%- title%></h2>
+      <h2 style="margin-top: -8px;">Verifier</h2>
       <hr style="background-color: whitesmoke;margin-top: -2px;">
       <h3 id="inbox">INBOX</h3>
       <hr style="background-color: whitesmoke;margin-top: -2px;">
@@ -33,10 +33,12 @@
     <button class="dropdown-btn">ผลการตรวจสอบ
       <i class="fa fa-caret-down"></i>
     </button>
-    <div class="dropdown-container">
-      <a class="list" href="#">ผ่าน</a>
-      <a class="list" href="#">ไม่ผ่าน</a>
-    </div>
+    <% if(fs.existsSync(process.cwd()+'/approved/holder_tr.dt')) { %>
+      <a class="list" href="#">นายประณิธาน</a>
+    <% } %>
+      <!-- <a class="list" href="#">ผ่าน</a>
+      <a class="list" href="#">ไม่ผ่าน</a> -->
+
   </div>
 
   <div id="main" class="row">
@@ -48,12 +50,7 @@
     <div id="content" class="col-sm-12">
       <div id="content-box">
         <p>
-          <% selectedData = null; %>
-          <% if (selectedData != null) {%>
-          <% for(var i=0;i<list.length;i++) { %>
-          <%= mock_up_data[i] %><br>
-          <% } %>
-          <% } %>
+   
         </p>
       </div>
       <center><button type="button" id="sentbtn" class="btn btn-dark btn-lg">ตรวจสอบ</button></center>

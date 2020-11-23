@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title><%- title%></title>
+  <title>Issuer</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="issuer.css" />
@@ -18,13 +18,15 @@
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <center><img src="https://www.w3schools.com/images/w3schools_green.jpg" class="rounded-circle" alt="pic">
-      <h2 style="margin-top: -20px;"><%- title%></h2>
+      <h2 style="margin-top: -20px;">Issuer</h2>
       <hr style="background-color: whitesmoke;margin-top: -2px;">
       <h3 id="inbox">INBOX</h3>
       <hr style="background-color: whitesmoke;margin-top: -2px;">
-      <a class="list" href="#">นายประณิธาน วิทยารณยุทธ</a>
-      <a class="list" href="#">นายปรินทร ปาณฑิตยางกูร</a>
-      <a class="list" href="#">นายธนกฤต บรรจงศิลป์</a>
+      <% if(fs.existsSync(process.cwd()+'/requests/holder_request.credential')){ %>
+        <a class="list" href="/checkdetail">นายประณิธาน วิทยารณยุทธ</a>
+      <% }else{ %>
+        <a class="list" href="#">ยังไม่มีคำร้องขอ</a>
+      <% } %>
     </center>
   </div>
 
@@ -37,12 +39,23 @@
     <div id="content" class="col-sm-12">
       <div id="content-box">
         <p>
+          <% if( typeof(uuid) != 'undefined' && typeof(name) != 'undefined'){ %>
+            UUID: <%= uuid %>
+            <br>
+            Name: <%= name %>
+          <% } %>
           <!-- data -->
         </p>
       </div>
+      <br>
       <center>
-        <button type="button" id="sentbtn" class="btn btn-dark btn-lg">อนุมัติ</button>
-        <button type="button" id="sentbtn" class="btn btn-dark btn-lg">ไม่อนุมัติ</button>
+        <% if( typeof(uuid) != 'undefined' && typeof(name) != 'undefined'){ %>
+          <form method="post" action="/issueDT" id="issue_dt">
+            <input type="password" name="password" placeholder="Enter password"/>
+          </form>
+          <button type="submit" id="sentbtn" class="btn btn-dark btn-lg" form="issue_dt">อนุมัติ</button>
+          <button type="button" id="sentbtn" class="btn btn-dark btn-lg">ไม่อนุมัติ</button>
+        <% } %>
       </center>
     </div>
   </div>

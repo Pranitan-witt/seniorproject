@@ -6,7 +6,9 @@ const { generateKeyPairSync } = require('crypto');
 const path = require('path');
 const fs = require('fs');
 const walletPath = path.join(process.cwd(), 'wallet');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+
+const issuer_walletPath = path.resolve(__dirname, '..', 'issuer', 'requests')
 
 // set the view engine to ejs
 app.set("view engine", "ejs");
@@ -17,8 +19,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 const title = "Holder";
 // index page
 app.get("/", function (req, res) {
+
   if(fs.existsSync(walletPath+'/holder.credential')){
-    res.render('pages/holder');
+    res.render('pages/holder', {
+
+      "fs":fs
+    });
   }else{
     res.render("pages/index");
   }
@@ -67,8 +73,71 @@ app.post("/holder", function (req, res) {
       }
   });
 
+  
+  res.render("pages/holder", {
+    "fs":fs
+  });
+});
 
-  res.render("pages/holder");
+app.post("/requestDT", function(req, res){
+  let passphrase = req.body.password;
+  let json_obj = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'wallet', 'holder.credential'),'utf8'));
+  let prKey = fs.readFileSync(path.resolve(__dirname, 'wallet', 'holder_privatekey.key'));
+  var token = jwt.sign(new Date().toString(), {key:prKey, passphrase}, { algorithm: 'RS256'});
+  json_obj.proof = token
+  fs.writeFile(issuer_walletPath+"/holder_request.credential", JSON.stringify(json_obj), function(err) {
+    if(err) throw err;
+    console.log("Holder request vc was saved!");
+  });
+  res.render("pages/holder", {
+    "fs":fs
+  });
+});
+
+app.get("/showDT", function(req, res){
+  let data = JSON.parse(fs.readFileSync(process.cwd()+'/digitalTranscript/holder_tr.dt','utf8'));
+  let uuid = data.uuid;
+  let token = data.data;
+  var result = undefined;
+  try{
+    var myJSONObject = { 
+      "uuid":uuid
+    }; 
+    request({
+      url: "http://localhost:3000/api/searchkey/",
+      method: "POST",
+      json: true,   // <--Very important!!!
+      body: myJSONObject
+      }, 
+      function (error, response, body){
+      if(body){
+        jwt.verify(token, body['publickey'], function(err, decoded){
+          if(decoded != undefined){
+            result = decoded;
+            res.render('pages/holder', {
+              "fs":fs,
+              "result":result
+            });
+          }else{
+            console.log('Can not decrypt !')
+          }
+
+        });
+      }else{
+        console.log(`Something went wrong: ${error}`);
+      }
+    }); 
+  }catch(error){
+    console.log("Error can't decrypt the cipher!")
+  }
+});
+
+app.get('/sendDT', function(req, res){
+  console.log(path.resolve(__dirname, '..', 'verifier', 'requests')+'/holder_tr.dt');
+  fs.copyFileSync(process.cwd()+'/digitalTranscript/holder_tr.dt', path.resolve(__dirname, '..', 'verifier', 'requests')+'/holder_tr.dt');
+  res.render('pages/holder', {
+    "fs":fs
+  });
 });
 
 app.listen(3001);

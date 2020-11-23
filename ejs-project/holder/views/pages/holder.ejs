@@ -1,40 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <!-- <head>
-    <title>Holder</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="holder.css" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-  </head>
-  <body>
-    <script type="text/javascript" src="holder.js"></script>
-    <div class="container-fluid h-100">
-      <div class="row justify-content-center h-100">
-        <div id="menu" class="col-sm-4">
-            <p id="menu-topic">WALLET</p>
-            <div id="name-list">   
 
-             <a href="" style="color:red">Request for transcript.</a> 
-              <button disabled>Request for transcript.</button>
-          </div>
-        </div>
-        <div id="content" class="col-sm-8">
-          <p id="content-topic">HOLDER</p>
-          <div id="content-box">
-            <p>
-
-            
-            </p>
-          </div>
-        </div> -->
 
 <head>
-  <title>Holder/title>
+  <title>Holder </title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="holder.css" />
@@ -43,7 +13,7 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
 </head>
 
 <body>
@@ -58,9 +28,12 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-container">
-      <a class="list" href="#">เทอม 1 ปีการศึกษา 2560</a>
+      <% if (fs.existsSync(process.cwd()+'/digitalTranscript/holder_tr.dt')){ %>
+          <a class="list" href="/showDT">Your transcript</a>
+      <% } %>
+      <!-- <a class="list" href="#">เทอม 1 ปีการศึกษา 2560</a>
       <a class="list" href="#">เทอม 2 ปีการศึกษา 2560</a>
-      <a class="list" href="#">เทอม 1 ปีการศึกษา 2561</a>
+      <a class="list" href="#">เทอม 1 ปีการศึกษา 2561</a> -->
     </div>
   </div>
 
@@ -73,11 +46,37 @@
     <div id="content" class="col-sm-12">
       <div id="content-box">
         <p>
-
-        </p>
+          <% if (fs.existsSync('/home/pranitan/fabric-samples/ejs-project/issuer/requests/holder_request.credential')){ %>
+              Proceeding for your Digital Transcript
+          <% }else if(!fs.existsSync('/home/pranitan/fabric-samples/ejs-project/issuer/requests/holder_request.credential') && fs.existsSync(process.cwd()+'/digitalTranscript/holder_tr.dt') && typeof(result) != 'undefined'){ %>
+              University: <%= result.issuer.name %> <br>
+              Name: <%= result.credentialSubject.namePrefix %>
+                    <%= result.credentialSubject.givenName %>
+                    <%= result.credentialSubject.familyName %> <br>
+              Faculty: <%= result.credentialSubject.facultyName %><br>
+              Major: <%= result.credentialSubject.program.major %> <br>
+              GPX: <%= result.credentialSubject.GPX %>
+              
+          <% }else if(fs.existsSync(process.cwd()+'/digitalTranscript/holder_tr.dt')){ %>
+              
+          <% } %>
+          </p>
 
       </div>
-      <center><button type="button" id="sentbtn" class="btn btn-dark btn-lg">ส่งคำขอ Transcript</button></center>
+       <br>
+      <% if (!fs.existsSync('/home/pranitan/fabric-samples/ejs-project/issuer/requests/holder_request.credential') && !fs.existsSync(process.cwd()+'/digitalTranscript/holder_tr.dt')){ %>
+        <center>
+          <form  method="post" action="/requestDT" id="request_form">
+            <input type="password" name="password" placeholder="Enter password " />
+          </form>
+          <button type="submit" id="sentbtn" class="btn btn-dark btn-lg" form="request_form">ส่งคำขอ Transcript</button>
+        </center>
+      <% }else if(!fs.existsSync('/home/pranitan/fabric-samples/ejs-project/issuer/requests/holder_request.credential') && fs.existsSync(process.cwd()+'/digitalTranscript/holder_tr.dt') && typeof(result) != 'undefined' && !fs.existsSync('/home/pranitan/fabric-samples/ejs-project/verifier/requests/holder_tr.dt'))  { %>
+          <center>
+            <a href="sendDT"><h1>Send to verifier</h1></a>
+
+          </center>
+      <% } %>
     </div>
   </div>
 
