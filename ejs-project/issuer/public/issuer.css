@@ -30,8 +30,9 @@ body {
 
 #content-box {
   text-align: center;
-  font-size: min(2.3vw, 20px);
-  background-color: rgba(190, 190, 190, 0.6);
+  font-size: min(2.3vw, 26px);
+  /* background-color: rgba(190, 190, 190, 0.6); */
+  padding-top: 100px;
   border-radius: 5%;
   margin: auto;
   height: 50%;
@@ -40,6 +41,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   align-content: center;
+  text-align: left;
 }
 
 a.list {
@@ -160,4 +162,32 @@ input {
 #inbox {
   color: white;
   margin-top: -13px;
+}
+
+#textbox {
+  border: 3px solid black;
+  border-radius: 9px;
+  width: 600px;
+  height: 400px;
+  background-color: rgb(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+  text-align: left;
+}
+
+::placeholder {
+  color: black;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: black;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: black;
 }

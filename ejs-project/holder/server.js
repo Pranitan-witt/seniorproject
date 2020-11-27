@@ -15,6 +15,9 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
+var myUUID = undefined;
+
 // use res.render to load up an ejs view file
 const title = "Holder";
 // index page

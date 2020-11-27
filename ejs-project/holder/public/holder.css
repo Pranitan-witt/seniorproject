@@ -36,16 +36,16 @@ body {
 
 #content-box {
   text-align: center;
-  font-size: min(2.3vw, 20px);
-  background-color: rgba(190, 190, 190, 0.6);
+  font-size: min(2.3vw, 26px);
+  /* background-color: wheat; */
   border-radius: 5%;
-  margin: auto;
-  height: 50%;
+  padding-top: 100px;
   width: 90%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   align-content: center;
+  text-align: left;
 }
 
 a.list {
@@ -93,7 +93,7 @@ a:hover {
 
 #main {
   /*  Top nav   */
-  transition: margin-left 0.5s;
+  /* transition: margin-left 0.5s; */
   background-color: black;
   color: #f1f1f1;
 }
@@ -187,6 +187,37 @@ input {
   background-color: white;
 }
 
-#sentbtn {
-  margin-top: 30px;
+#textbox {
+  border: 3px solid black;
+  border-radius: 9px;
+  /* padding: 50px; */
+  width: 600px;
+  height: 400px;
+  background-color: rgb(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+  text-align: left;
+}
+
+#buttonbox {
+  border: 3px solid black;
+  border-radius: 9px;
+  padding: 10px;
+}
+
+::placeholder {
+  color: black;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: black;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: black;
 }

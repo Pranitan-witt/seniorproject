@@ -17,13 +17,13 @@
 </head>
 
 <body>
-  <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <center><img src="https://www.w3schools.com/images/w3schools_green.jpg" class="rounded-circle" alt="pic">
+  <!-- <div id="mySidenav" class="sidenav"> -->
+      <div id="mySidenav" class="sidenav">
+
+    <center><img src="/pic/นักศึกษากลม.png" style="height:200px;width:200px;" class="rounded-circle" alt="pic">
       <h2 style="margin-top: -8px;">Holder</h2>
     </center>
     <hr style="background-color: whitesmoke;margin-top: -2px;">
-    <button class="menu-list" href="#">Home</button>
     <button class="dropdown-btn">My transcript
       <i class="fa fa-caret-down"></i>
     </button>
@@ -38,17 +38,21 @@
   </div>
 
   <div id="main" class="row">
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; VDEGREE</span>
+
+      <span style="font-size:30px;cursor:pointer;padding-left:15px;margin-right: -10px;" onclick="window.location='/'">VDEGREE</span>
+
     <div id="uuid">
-      <input type="text" placeholder="123456789" disabled>
+      <% if(fs.readFileSync(process.cwd()+'/wallet/holder.credential')) { %>
+        <input type="text" placeholder="<%= JSON.parse(fs.readFileSync(process.cwd()+'/wallet/holder.credential')).uuid %>" style="width:335px;" disabled>
+      <% } %>
     </div>
 
     <div id="content" class="col-sm-12">
       <div id="content-box">
-        <p>
-          <% if (fs.existsSync('/home/pranitan/fabric-samples/ejs-project/issuer/requests/holder_request.credential')){ %>
+        <p id="textbox">
+          <% if (fs.existsSync('/home/pranitan/seniorproject/ejs-project/issuer/requests/holder_request.credential')){ %>
               Proceeding for your Digital Transcript
-          <% }else if(!fs.existsSync('/home/pranitan/fabric-samples/ejs-project/issuer/requests/holder_request.credential') && fs.existsSync(process.cwd()+'/digitalTranscript/holder_tr.dt') && typeof(result) != 'undefined'){ %>
+          <% }else if(!fs.existsSync('/home/pranitan/seniorproject/ejs-project/issuer/requests/holder_request.credential') && fs.existsSync(process.cwd()+'/digitalTranscript/holder_tr.dt') && typeof(result) != 'undefined'){ %>
               University: <%= result.issuer.name %> <br>
               Name: <%= result.credentialSubject.namePrefix %>
                     <%= result.credentialSubject.givenName %>
@@ -66,16 +70,17 @@
 
       </div>
        <br>
-      <% if (!fs.existsSync('/home/pranitan/fabric-samples/ejs-project/issuer/requests/holder_request.credential') && !fs.existsSync(process.cwd()+'/digitalTranscript/holder_tr.dt')){ %>
+      <% if (!fs.existsSync('/home/pranitan/seniorproject/ejs-project/issuer/requests/holder_request.credential') && !fs.existsSync(process.cwd()+'/digitalTranscript/holder_tr.dt')){ %>
         <center>
           <form  method="post" action="/requestDT" id="request_form">
             <input type="password" name="password" placeholder="Enter password " />
           </form>
-          <button type="submit" id="sentbtn" class="btn btn-dark btn-lg" form="request_form">ส่งคำขอ Transcript</button>
+          <button type="submit" id="sentbtn" class="btn btn-dark btn-lg" form="request_form" style="margin-top:15px;">ส่งคำขอ Transcript</button>
         </center>
-      <% }else if(!fs.existsSync('/home/pranitan/fabric-samples/ejs-project/issuer/requests/holder_request.credential') && fs.existsSync(process.cwd()+'/digitalTranscript/holder_tr.dt') && typeof(result) != 'undefined' && !fs.existsSync('/home/pranitan/fabric-samples/ejs-project/verifier/requests/holder_tr.dt'))  { %>
+      <% }else if(!fs.existsSync('/home/pranitan/seniorproject/ejs-project/issuer/requests/holder_request.credential') && fs.existsSync(process.cwd()+'/digitalTranscript/holder_tr.dt') && typeof(result) != 'undefined' && !fs.existsSync('/home/pranitan/seniorproject/ejs-project/verifier/requests/holder_tr.dt'))  { %>
           <center>
-            <a href="sendDT"><h1>Send to verifier</h1></a>
+            <!-- <a href="sendDT"><h1 style="color:black" id="buttonbox">SEND TO VERIFIER</h1></a> -->
+            <button type="submit" id="sentbtn" class="btn btn-dark btn-lg"><a href="/sendDT">SEND TO VERIFIER </a></button>
 
           </center>
       <% } %>
@@ -84,15 +89,15 @@
 
   <script>
     // Navbar
-    function openNav() {
+    // function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
       document.getElementById("main").style.marginLeft = "250px";
-    }
+    // }
 
-    function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-      document.getElementById("main").style.marginLeft = "0";
-    }
+    // function closeNav() {
+    //   document.getElementById("mySidenav").style.width = "250px";
+    //   document.getElementById("main").style.marginLeft = "250px";
+    // }
 
     // Dropdown in side navbar
     var dropdown = document.getElementsByClassName("dropdown-btn");

@@ -15,9 +15,10 @@ app.use(express.static("public"));
 // use res.render to load up an ejs view file
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+var myUUID = undefined;
+
 // index page
 app.get("/", function (req, res) {
-
   if(fs.existsSync(walletPath+'/verifier.credential')){
     res.render('pages/verifier', {
       "fs":fs
@@ -25,6 +26,15 @@ app.get("/", function (req, res) {
   }else{
     res.render("pages/index");
   }
+});
+
+app.get('showData', function(req, res){
+  myUUID = fs.readFileSync(walletPath+'/verifier.credential').uuid;
+  uuid = data.uuid;
+  res.render('pages/verfier', {
+    "fs":fs,
+    "uuid":uuid
+  });
 });
 
 app.post("/verifier", function (req, res) {

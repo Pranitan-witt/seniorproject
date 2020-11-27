@@ -16,8 +16,9 @@
 
 <body>
   <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <center><img src="https://www.w3schools.com/images/w3schools_green.jpg" class="rounded-circle" alt="pic">
+    <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+    <center>
+      <img src="/pic/มหาลัยกลม.png" style="height:200px;width:200px;" class="rounded-circle" alt="pic">
       <h2 style="margin-top: -20px;">Issuer</h2>
       <hr style="background-color: whitesmoke;margin-top: -2px;">
       <h3 id="inbox">INBOX</h3>
@@ -25,20 +26,22 @@
       <% if(fs.existsSync(process.cwd()+'/requests/holder_request.credential')){ %>
         <a class="list" href="/checkdetail">นายประณิธาน วิทยารณยุทธ</a>
       <% }else{ %>
-        <a class="list" href="#">ยังไม่มีคำร้องขอ</a>
+        <a class="list" style="text-decoration:none">ยังไม่มีคำร้องขอ</a>
       <% } %>
     </center>
   </div>
 
   <div id="main" class="row">
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; VDEGREE</span>
+    <span style="font-size:30px;cursor:pointer;padding-left:15px;margin-right: -10px;" onclick="window.location='/'">VDEGREE</span>
     <div id="uuid">
-      <input type="text" placeholder="123456789" disabled>
+      <% if(fs.readFileSync(process.cwd()+'/wallet/issuer.credential')) { %>
+        <input type="text" placeholder="<%= JSON.parse(fs.readFileSync(process.cwd()+'/wallet/issuer.credential')).uuid %>" style="width:335px;" disabled>
+      <% } %>
     </div>
 
     <div id="content" class="col-sm-12">
       <div id="content-box">
-        <p>
+        <p id="textbox">
           <% if( typeof(uuid) != 'undefined' && typeof(name) != 'undefined'){ %>
             UUID: <%= uuid %>
             <br>
@@ -50,7 +53,7 @@
       <br>
       <center>
         <% if( typeof(uuid) != 'undefined' && typeof(name) != 'undefined'){ %>
-          <form method="post" action="/issueDT" id="issue_dt">
+          <form method="post" action="/issueDT" id="issue_dt" style="padding-top: 50px;">
             <input type="password" name="password" placeholder="Enter password"/>
           </form>
           <button type="submit" id="sentbtn" class="btn btn-dark btn-lg" form="issue_dt">อนุมัติ</button>
@@ -62,15 +65,15 @@
 
   <script>
     // Navbar
-    function openNav() {
+    // function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
       document.getElementById("main").style.marginLeft = "250px";
-    }
+    // }
 
-    function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-      document.getElementById("main").style.marginLeft = "0";
-    }
+    // function closeNav() {
+    //   document.getElementById("mySidenav").style.width = "0";
+    //   document.getElementById("main").style.marginLeft = "0";
+    // }
 
   </script>
 
