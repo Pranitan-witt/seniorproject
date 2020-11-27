@@ -27,8 +27,11 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-container">
-      <a class="list" href="#">นายประณิธาน</a>
-      <a class="list" href="#">นายปรินทร</a>
+    <% if(fs.existsSync(process.cwd()+'/requests/holder_tr.dt')) { %>
+       <a class="list" href="/checkdetail">นายประณิธาน</a>
+       
+      <!-- <a class="list" href="#">นายปรินทร</a>  -->
+    <% } %>
     </div>
     <button class="dropdown-btn">ผลการตรวจสอบ
       <i class="fa fa-caret-down"></i>
@@ -50,10 +53,30 @@
     <div id="content" class="col-sm-12">
       <div id="content-box">
         <p>
+          <% if(typeof(uuid) != 'undefined'){ %>
+            UUID:<%= uuid %><br>
+            has sent the request
+          <% }else if(typeof(result) != 'undefined'){ %>
+              University: <%= result.issuer.name %> <br>
+              Name: <%= result.credentialSubject.namePrefix %>
+                    <%= result.credentialSubject.givenName %>
+                    <%= result.credentialSubject.familyName %> <br>
+              Faculty: <%= result.credentialSubject.facultyName %><br>
+              Major: <%= result.credentialSubject.program.major %> <br>
+              GPX: <%= result.credentialSubject.GPX %>
+          <% } %>
    
         </p>
       </div>
-      <center><button type="button" id="sentbtn" class="btn btn-dark btn-lg">ตรวจสอบ</button></center>
+      <% if(typeof(confirmButton) != 'undefined') { %>
+        <br>
+      <center>
+        <form action='/approveDT' method='post' id="confirmDT">
+          
+        </form>
+        
+        <button type="password" id="sentbtn" class="btn btn-dark btn-lg" form="confirmDT">ตรวจสอบ</button></center>
+      <% } %>
     </div>
   </div>
 

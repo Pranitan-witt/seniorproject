@@ -69,11 +69,64 @@ app.post("/verifier", function (req, res) {
           console.log(`Something went wrong: ${error}`);
       }
   });
-
   
   res.render("pages/verifier", {
     "fs":fs
   });
+});
+
+app.get('/checkdetail', function(req, res){
+  let json_obj = JSON.parse(fs.readFileSync(process.cwd()+'/requests/holder_tr.dt'), 'utf8');
+  res.render('pages/verifier', {
+    "fs":fs,
+    "confirmButton":true,
+    "uuid":json_obj.uuid
+  });
+});
+
+app.post('/approveDT', function(req, res){
+  let data = JSON.parse(fs.readFileSync(process.cwd()+'/requests/holder_tr.dt','utf8'));
+  let uuid = data.uuid;
+  let token = data.data;
+  var result = undefined;
+  try{
+    var myJSONObject = { 
+      "uuid":uuid
+    }; 
+    request({
+      url: "http://localhost:3000/api/searchkey/",
+      method: "POST",
+      json: true,   // <--Very important!!!
+      body: myJSONObject
+      }, 
+      function (error, response, body){
+      if(body){
+        jwt.verify(token, body['publickey'], function(err, decoded){
+          if(decoded != undefined){
+            result = decoded;
+            try {
+              fs.copyFileSync(process.cwd()+'/requests/holder_tr.dt', process.cwd()+'/approved/holder_tr.dt');
+              fs.unlinkSync(process.cwd()+'/requests/holder_tr.dt');
+              //file removed
+            } catch(err) {
+              console.error(err)
+            }
+            res.render('pages/verifier', {
+              "fs":fs,
+              "result":result
+            });
+          }else{
+            console.log('Can not decrypt !')
+          }
+
+        });
+      }else{
+        console.log(`Something went wrong: ${error}`);
+      }
+    }); 
+  }catch(error){
+    console.log("Error can't decrypt the cipher!")
+  }
 });
 
 app.listen(3003);
