@@ -123,6 +123,18 @@ app.post('/issueDT', function(req, res) {
               console.log("Holder digital transcript was saved!");
             });
 
+            try {
+              fs.unlinkSync(process.cwd()+'/requests/holder_request.credential');
+              //file removed
+            } catch(err) {
+              console.error(err)
+            }
+            
+            res.render('pages/issuer', {
+              "fs":fs,
+              "myuuid":myuuid
+            });
+
           }else{
             console.log('Can not decrypt !')
           }
@@ -136,16 +148,7 @@ app.post('/issueDT', function(req, res) {
     console.log("Error can't decrypt the cipher!")
   }
 
-  try {
-    fs.unlinkSync(process.cwd()+'/requests/holder_request.credential');
-    //file removed
-  } catch(err) {
-    console.error(err)
-  }
   
-  res.render('pages/issuer', {
-    "fs":fs
-  });
 });
 
 app.listen(3002);
