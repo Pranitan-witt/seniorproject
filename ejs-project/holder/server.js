@@ -16,7 +16,6 @@ app.use(express.static("public"));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-var myUUID = undefined;
 
 // use res.render to load up an ejs view file
 const title = "Holder";
@@ -35,6 +34,7 @@ app.get("/", function (req, res) {
 
 app.post("/holder", function (req, res) {
   let passphrase = req.body.password;
+  let myuuid = undefined;
   const { publicKey, privateKey } = generateKeyPairSync('rsa', {
     modulusLength: 4096,
     publicKeyEncoding: {
@@ -59,6 +59,7 @@ app.post("/holder", function (req, res) {
       body: myJSONObject
   }, function (error, response, body){
       if(body){
+        myuuid = body.uuid;
         fs.writeFile(walletPath+'/holder.credential', JSON.stringify(body), function (err) {
           if (err) throw err;
           console.log('Holder VC was saved!');
@@ -71,15 +72,17 @@ app.post("/holder", function (req, res) {
           if(err) throw err;
           console.log("Public key was saved!");
         });
+         
+        res.render("pages/holder", {
+          "fs":fs,
+          "myuuid":myuuid
+        });
       }else{
           console.log(`Something went wrong: ${error}`);
       }
   });
 
-  
-  res.render("pages/holder", {
-    "fs":fs
-  });
+ 
 });
 
 app.post("/requestDT", function(req, res){

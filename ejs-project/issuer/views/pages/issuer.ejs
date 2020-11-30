@@ -34,7 +34,7 @@
   <div id="main" class="row">
     <span style="font-size:30px;cursor:pointer;padding-left:15px;margin-right: -10px;" onclick="window.location='/'">VDEGREE</span>
     <div id="uuid">
-      <% if(fs.readFileSync(process.cwd()+'/wallet/issuer.credential')) { %>
+      <% if(fs.existsSync(process.cwd()+'/wallet/issuer.credential')) { %>
         <input type="text" placeholder="<%= JSON.parse(fs.readFileSync(process.cwd()+'/wallet/issuer.credential')).uuid %>" style="width:335px;" disabled>
       <% } %>
     </div>
