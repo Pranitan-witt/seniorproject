@@ -47,9 +47,9 @@
     <span style="font-size:30px;cursor:pointer;padding-left:15px;margin-right: -10px;" onclick="window.location='/'">VDEGREE</span>
     <div id="uuid">
       <% if(typeof(myuuid) != 'undefined') { %>
-        <input type="text" placeholder="<%= myuuid %>" style="width:335px;" disabled>
+        <input type="text" placeholder="<%= myuuid %>" size="36" disabled>
       <% }else if(fs.existsSync(process.cwd()+'/wallet/verifier.credential')) { %>
-        <input type="text" placeholder="<%= JSON.parse(fs.readFileSync(process.cwd()+'/wallet/verifier.credential')).uuid %>" style="width:335px;" disabled>
+        <input type="text" placeholder="<%= JSON.parse(fs.readFileSync(process.cwd()+'/wallet/verifier.credential')).uuid %>" size="36" disabled>
       <% } %>
       
     </div>
