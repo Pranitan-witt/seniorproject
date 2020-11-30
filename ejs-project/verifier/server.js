@@ -16,7 +16,7 @@ app.use(express.static("public"));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 var myUUID = undefined;
-
+ 
 // index page
 app.get("/", function (req, res) {
   if(fs.existsSync(walletPath+'/verifier.credential')){
