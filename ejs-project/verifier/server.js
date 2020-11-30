@@ -28,17 +28,10 @@ app.get("/", function (req, res) {
   }
 });
 
-app.get('showData', function(req, res){
-  myUUID = fs.readFileSync(walletPath+'/verifier.credential').uuid;
-  uuid = data.uuid;
-  res.render('pages/verfier', {
-    "fs":fs,
-    "uuid":uuid
-  });
-});
 
 app.post("/verifier", function (req, res) {
   let passphrase = req.body.password;
+  let myuuid = undefined;
   const { publicKey, privateKey } = generateKeyPairSync('rsa', {
     modulusLength: 4096,
     publicKeyEncoding: {
@@ -63,6 +56,7 @@ app.post("/verifier", function (req, res) {
       body: myJSONObject
   }, function (error, response, body){
       if(body){
+        myuuid = body.uuid;
         fs.writeFile(walletPath+'/verifier.credential', JSON.stringify(body), function (err) {
           if (err) throw err;
           console.log('Verifier VC was saved!');
@@ -75,13 +69,14 @@ app.post("/verifier", function (req, res) {
           if(err) throw err;
           console.log("Public key was saved!");
         });
+
+        res.render("pages/verifier", {
+          "fs":fs,
+          "myuuid":myuuid
+        });
       }else{
-          console.log(`Something went wrong: ${error}`);
+        console.log(`Something went wrong: ${error}`);
       }
-  });
-  
-  res.render("pages/verifier", {
-    "fs":fs
   });
 });
 
