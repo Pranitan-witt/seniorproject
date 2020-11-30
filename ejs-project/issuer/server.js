@@ -58,6 +58,7 @@ app.post("/issuer", function (req, res) {
       body: myJSONObject
   }, function (error, response, body){
       if(body){
+        myuuid = body.uuid;
         fs.writeFile(walletPath+'/issuer.credential', JSON.stringify(body), function (err) {
           if (err) throw err;
           console.log('Issuer VC was saved!');
@@ -70,13 +71,15 @@ app.post("/issuer", function (req, res) {
           if(err) throw err;
           console.log("Public key was saved!");
         });
+        res.render("pages/issuer", {
+          "fs":fs,
+          "myuuid":myuuid
+        });
       }else{
           console.log(`Something went wrong: ${error}`);
       }
   });
-  res.render("pages/issuer", {
-    "fs":fs
-  });
+  
 });
 
 app.get('/checkdetail', function(req, res){
@@ -123,18 +126,7 @@ app.post('/issueDT', function(req, res) {
               console.log("Holder digital transcript was saved!");
             });
 
-            try {
-              fs.unlinkSync(process.cwd()+'/requests/holder_request.credential');
-              //file removed
-            } catch(err) {
-              console.error(err)
-            }
             
-            res.render('pages/issuer', {
-              "fs":fs,
-              "myuuid":myuuid
-            });
-
           }else{
             console.log('Can not decrypt !')
           }
@@ -148,7 +140,17 @@ app.post('/issueDT', function(req, res) {
     console.log("Error can't decrypt the cipher!")
   }
 
+  try {
+    fs.unlinkSync(process.cwd()+'/requests/holder_request.credential');
+    //file removed
+  } catch(err) {
+    console.error(err)
+  }
   
+  res.render('pages/issuer', {
+    "fs":fs
+  });
+
 });
 
 app.listen(3002);
