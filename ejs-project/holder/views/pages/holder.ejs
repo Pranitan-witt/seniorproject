@@ -43,9 +43,9 @@
 
     <div id="uuid">
       <% if(typeof(myuuid) != 'undefined') { %>
-        <input type="text" placeholder="<%= myuuid %>" style="width:335px;" disabled>
+        <input type="text" placeholder="<%= myuuid %>" size="36" disabled>
       <% }else if(fs.existsSync(process.cwd()+'/wallet/holder.credential')) { %>
-        <input type="text" placeholder="<%= JSON.parse(fs.readFileSync(process.cwd()+'/wallet/holder.credential')).uuid %>" style="width:335px;" disabled>
+        <input type="text" placeholder="<%= JSON.parse(fs.readFileSync(process.cwd()+'/wallet/holder.credential')).uuid %>" size="36" disabled>
       <% } %>
     </div>
 
