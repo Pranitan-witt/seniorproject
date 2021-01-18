@@ -89,7 +89,52 @@ app.get('/checkdetail', function(req, res){
   });
 });
 
-app.post('/approveDT', function(req, res){
+app.get('/showDT', function(req, res){
+  let data = JSON.parse(fs.readFileSync(process.cwd()+'/approved/holder_tr.dt','utf8'));
+  let uuid = data.uuid;
+  let token = data.data;
+  var result = undefined;
+  try{
+    var myJSONObject = { 
+      "uuid":uuid
+    }; 
+    request({
+      url: "http://localhost:3000/api/searchkey/",
+      method: "POST",
+      json: true,   // <--Very important!!!
+      body: myJSONObject
+      }, 
+      function (error, response, body){
+      if(body){
+        jwt.verify(token, body['publickey'], function(err, decoded){
+          if(decoded != undefined){
+            result = decoded;
+            try {
+              //file removed
+            } catch(err) {
+              console.error(err)
+            }
+            res.render('pages/verifier', {
+              "fs":fs,
+              "result":result
+            });
+          }else{
+            console.log('Can not decrypt !')
+          }
+
+        });
+      }else{
+        console.log(`Something went wrong: ${error}`);
+      }
+    }); 
+  }catch(error){
+    console.log("Error can't decrypt the cipher!")
+  }
+
+  
+});
+
+app.get('/approveDT', function(req, res){
   let data = JSON.parse(fs.readFileSync(process.cwd()+'/requests/holder_tr.dt','utf8'));
   let uuid = data.uuid;
   let token = data.data;

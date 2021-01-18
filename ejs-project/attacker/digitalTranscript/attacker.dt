@@ -1,0 +1,30 @@
+{
+	"@context" : ["https://www.w3.org/2018/credentials/v1"],
+	"id" : "swu:transcript:123456789",
+	"type" : ["VerifiableCredential", "UniversityTranscript"],
+	"issuer" : {
+        "name" : "มหาวิทยาลัยศรีนครินทรวิโรฒ",
+        "address" : {
+            "buildingNumber" : "114",
+            "streetName" : "สุขุมวิท",
+            "additionalStreetName" : "23",
+            "countrySubDivisionName" : "กรุงเทพมหานคร",
+            "countrySubDivisionCode" : "11",
+            "countryCode" : "th",
+            "postcode" : "10110"
+        }
+    },
+	"credentialSubject" : {
+        "id" : "studentid:swu:60102010999",
+        "namePrefix" : "นาย",
+        "givenName" : "โจรกระจอก",
+        "familyName" : "หัวใส",
+        "birthDate" : "1999-01-01T00:00:00+07:00",
+        "facultyName" : "คณะวิทยาศาสตร์",
+        "program" : {
+            "name" : "วิทยาศาสตรบัณฑิต (วท.บ.)",
+            "major" : "วิทยาการคอมพิวเตอร์"
+        },
+	    "GPX": "8.00"
+	}
+}

@@ -36,7 +36,7 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <% if(fs.existsSync(process.cwd()+'/approved/holder_tr.dt')) { %>
-      <a class="list" href="#">นายประณิธาน</a>
+      <a class="list" href="/showDT">นายประณิธาน</a>
     <% } %>
       <!-- <a class="list" href="#">ผ่าน</a>
       <a class="list" href="#">ไม่ผ่าน</a> -->
@@ -68,14 +68,16 @@
               Faculty: <%= result.credentialSubject.facultyName %><br>
               Major: <%= result.credentialSubject.program.major %> <br>
               GPX: <%= result.credentialSubject.GPX %>
-          <% } %>
+          <% }%>
+
+ 
    
         </p>
       </div>
       <% if(typeof(confirmButton) != 'undefined') { %>
         <br>
       <center>
-        <form action='/approveDT' method='post' id="confirmDT">
+        <form action='/approveDT' method='get' id="confirmDT">
           
         </form>
         

@@ -7,3 +7,6 @@ rm -rf $PWD/issuer/requests/*
 rm -rf $PWD/verifier/wallet/*
 rm -rf $PWD/verifier/requests/*
 rm -rf $PWD/verifier/approved/*
+
+rm -rf $PWD/attacker/wallet/*
+rm -rf $PWD/attacker/fakeTr/*

@@ -8,7 +8,7 @@ export CORE_PEER_ADDRESS=localhost:7051
 export CORE_ORDERER_ADDRESS=localhost:7050 
 export CORE_CA_FILE=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 begin=0
-max=50000
+max=100
 start=`date +%s.%N`
 #for i in {1..10}
 for (( i = $begin; i < $max; i++ ))
