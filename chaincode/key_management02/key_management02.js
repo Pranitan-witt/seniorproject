@@ -9,18 +9,12 @@ var Chaincode = class {
       let ret = stub.getFunctionAndParameters();
       console.info(ret);
       let args = ret.params;
-      // initialise only if 4 parameters passed.
       if (args.length != 2) {
         return shim.error('Incorrect number of arguments. Expecting 2');
       }
 
       let uuid = args[0];
       let pu_key = args[1];
-  
-      // let A = args[0];
-      // let B = args[2];
-      // let Aval = args[1];
-      // let Bval = args[3];
 
       try{
         await stub.putState(uuid, Buffer.from(pu_key));
@@ -28,18 +22,6 @@ var Chaincode = class {
       }catch (err){
         return shim.error(err);
       }
-  
-      // try {
-      //   await stub.putState(A, Buffer.from(Aval));
-      //   try {
-      //     await stub.putState(B, Buffer.from(Bval));
-      //     return shim.success();
-      //   } catch (err) {
-      //     return shim.error(err);
-      //   }
-      // } catch (err) {
-      //   return shim.error(err);
-      // }
     }
   
     async Invoke(stub) {
