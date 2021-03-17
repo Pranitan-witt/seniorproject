@@ -12,10 +12,10 @@ class Key_management extends Contract {
           }
         ];
 
-        // for (let i = 0; i < keys.length; i++) {
-        //     await ctx.stub.putState('UUID' + i, Buffer.from(JSON.stringify(keys[i])));
-        //     console.info('Added <--> ', keys[i]);
-        // }
+         for (let i = 0; i < keys.length; i++) {
+             await ctx.stub.putState('UUID' + i, Buffer.from(JSON.stringify(keys[i])));
+             console.info('Added <--> ', keys[i]);
+         }
         console.info('============= END : Initialize Ledger ===========');
     }
 
